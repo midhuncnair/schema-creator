@@ -267,8 +267,14 @@ export class BaseType extends Base {
             ret_data[k] = this._transform(data[k]);
         }
 
-        if (this.isCompoundArray || this.isCompoundObject) {
+        if (this.isCompoundObject) {
             return ret_data;
+        } else if (this.isCompoundArray) {
+            let ca_ret_data: any[] = [];
+            for (let k of keys) {
+                ca_ret_data.push(ret_data[k]);
+            }
+            return ca_ret_data;
         } else {
             return ret_data['__0'];
         }
